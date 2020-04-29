@@ -22,6 +22,8 @@ class Example2  : AppCompatActivity() {
         Timber.plant()
 
         experimentOne()
+        experimentTwo()
+        experimentThree()
     }
 
     @ExperimentalCoroutinesApi
@@ -53,6 +55,48 @@ class Example2  : AppCompatActivity() {
             intervalFlow.collect {
                 Log.d("YO","Collection2B $it")
             }
+        }
+    }
+
+    data class Thing(val name:String)
+    private val things = listOf(Thing("0"), Thing("1"), Thing("2"), Thing("3"))
+    @ExperimentalCoroutinesApi
+    private fun experimentTwo(){
+        val flowyThings : Flow<Thing> = flow {
+            //Do something great in the background
+            things.forEach {thing ->
+                emit(thing)
+                delay(100)
+            }
+        }.flowOn(Dispatchers.Main)
+
+        //Let's get our things
+        CoroutineScope(Dispatchers.Main).launch {
+            flowyThings.collect {
+                Log.d("YO", "Our flowy thing ${it.name}")
+            }
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    private fun experimentThree() {
+        val flowyThingsList : Flow<List<Thing>> = flow {
+            //Do in the bg thread
+            (0..5).forEach {
+                //Let's show the list five times
+                emit(things)
+
+                delay(100)
+            }
+        }.flowOn(Dispatchers.Main)
+
+        //Let's collect our lists of things
+        CoroutineScope(Dispatchers.Main).launch {
+            flowyThingsList.collect {
+                val list = it
+                Log.d("Yo", "The list:$list")
+            }
+
         }
     }
 }
