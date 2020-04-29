@@ -14,5 +14,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
 
+    //ADD TO MANIFEST!
     fun onClickExample1(view: View) = startActivity(Intent(this, Example1::class.java))
+    fun onClickExample2(view: View) = startActivity(Intent(this, Example2::class.java))
 }

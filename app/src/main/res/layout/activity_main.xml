@@ -42,6 +42,13 @@
                 android:onClick="onClickExample1"
                 android:text="@string/example1_name"
                 android:textColor="@android:color/black" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickExample2"
+                android:text="@string/example2_name"
+                android:textColor="@android:color/black" />
         </LinearLayout>
     </ScrollView>
 

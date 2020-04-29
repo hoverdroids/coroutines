@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.hoverdroids.coroutines"
-        minSdkVersion(16)
+        minSdkVersion(24)
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
@@ -43,11 +43,23 @@ android {
 //More at https://developer.android.com/jetpack/androidx/migrate/artifact-mappings
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-    implementation("androidx.appcompat:appcompat:1.1.0")
+
+    //Kotlin
+    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     implementation("androidx.core:core-ktx:1.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4")
+
+    // Coroutines - Retrofit extention
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0")
+
+    //Logging
+    implementation("com.elvishew:xlog:1.6.1")
+    implementation("com.jakewharton.timber:timber:4.7.1")
+
+    implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("com.google.android.material:material:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
-    implementation(kotlin("stdlib-jdk8", KotlinCompilerVersion.VERSION))
     implementation("androidx.navigation:navigation-fragment-ktx:2.2.2")
     implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
 
@@ -65,12 +77,6 @@ dependencies {
     implementation("com.google.dagger:dagger:2.25.2")
     kapt("com.google.dagger:dagger-compiler:2.25.2")
     compileOnly("org.glassfish:javax.annotation:10.0-b28")
-
-    // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.4")
-    // Coroutines - Retrofit extention
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0")
 
     // Tests
     testImplementation("junit:junit:4.13")
